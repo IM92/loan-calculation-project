@@ -1,0 +1,16 @@
+version: "3"
+services:
+  localhost:
+    image: mysql:5.7.22
+    ports:
+      - 3306:3306
+    restart: always
+    environment:
+      MYSQL_DATABASE: kdbname
+      MYSQL_USER: kdbuser
+      MYSQL_PASSWORD: kdbpass
+      MYSQL_ROOT_PASSWORD: kdbpassroot
+    volumes:
+      - db_data:/var/lib/mysql
+volumes:
+  db_data: {}
