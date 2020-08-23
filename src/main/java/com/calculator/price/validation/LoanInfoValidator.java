@@ -3,7 +3,7 @@ package com.calculator.price.validation;
 import com.calculator.price.exceptions.CreateLoanInfoCalculatedException;
 import com.calculator.price.exceptions.CreateLoanInfoException;
 import com.calculator.price.model.LoanInfoCalculated;
-import com.calculator.price.model.LoanInfoRequest;
+import com.calculator.price.controller.facade.LoanInfoRequest;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;

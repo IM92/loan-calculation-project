@@ -1,7 +1,6 @@
 package com.calculator.price.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -9,6 +8,9 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "LOAN_INFO_CALCULATED")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 public class LoanInfoCalculated extends AbstractBaseEntity {
