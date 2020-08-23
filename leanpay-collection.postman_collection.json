@@ -1,0 +1,46 @@
+{
+	"info": {
+		"_postman_id": "0eaf4c6c-3485-4940-97ac-48bfcb4f97f9",
+		"name": "leanpay-collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[POST] -Create loan info",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n     \"amount\": 1000,\n     \"numberOfMonths\": 10,\n\t \"annualInterestPercent\": 5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/loanInfo/installment-plan",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"loanInfo",
+						"installment-plan"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"id": "59808bc6-29f9-46c4-b76a-1042d4dd4e87",
+			"value": "",
+			"disabled": true
+		}
+	],
+	"protocolProfileBehavior": {}
+}
