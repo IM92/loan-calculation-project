@@ -49,7 +49,7 @@ major logic for calculating the loan value.
 # REST Endpoints
 ```
 Create Calculated Loan Info
-POST http://localhost:8009/secure/loanInfo/installment-plan
+POST http://localhost:8080/secure/loanInfo/installment-plan
 ```
 
 ## APIs Documentation
