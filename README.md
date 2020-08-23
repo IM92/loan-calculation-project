@@ -34,7 +34,7 @@ We can run this maven comand
 
 ### Populate data in MYSQL
 In order to populate the MYSQL database with correct data we need to trigger the POST api call:
- - /secure/loanInfo/installment-plan
+ - /loanInfo/installment-plan
 
 We need to provide initial data for Request body in order for us trigger 
 major logic for calculating the loan value.
@@ -49,7 +49,7 @@ major logic for calculating the loan value.
 # REST Endpoints
 ```
 Create Calculated Loan Info
-POST http://localhost:8080/secure/loanInfo/installment-plan
+POST http://localhost:8080/loanInfo/installment-plan
 ```
 
 ## APIs Documentation
@@ -58,8 +58,10 @@ Swagger is used tool for API documentation.
 http://localhost:8080/swagger-ui.html#/
 
 # Improvements
-- Improve existing and add more tests (especially integration tests) with e2e and Junit
+- Improve existing and add more tests (especially integration tests) with e2e and Junit 
+  (Due my initial estimation of 12h for this task, I did not manage to write more test)
 - Provide one more layer of abstraction for the calculation part
+- Provide a different model in order to store information about ItemInfo data u MYSQL 
 - As final part from this task will be for example to deploy the project on one of the platforms (Heroku)
 - Add authentication/authorization, maybe implement SpringSecurity for this api call. But
 since there was only need for one call I figure it will be a huge over engineering effort.    
