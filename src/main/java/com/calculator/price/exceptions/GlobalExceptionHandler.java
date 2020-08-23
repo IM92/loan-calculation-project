@@ -36,8 +36,16 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = {CreateLoanInfoException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ExceptionResponseDTO handleStripeException(CreateLoanInfoException e) {
+    public ExceptionResponseDTO handleCreateLoanInfoException(CreateLoanInfoException e) {
         LOG.error("Unexpected error: Validation Exception while creating loan info");
+        ErrorStatus errorStatus = new ErrorStatus(HttpStatus.FORBIDDEN.value(), "Validation Exception");
+        return new ExceptionResponseDTO(e.getValidation().getErrors(), errorStatus);
+    }
+
+    @ExceptionHandler(value = {CreateLoanInfoCalculatedException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExceptionResponseDTO handleCreateLoanInfoCalculatedException(CreateLoanInfoCalculatedException e) {
+        LOG.error("Unexpected error: Validation Exception while creating loan info calculated");
         ErrorStatus errorStatus = new ErrorStatus(HttpStatus.FORBIDDEN.value(), "Validation Exception");
         return new ExceptionResponseDTO(e.getValidation().getErrors(), errorStatus);
     }

@@ -1,8 +1,6 @@
 package com.calculator.price.service;
 
 import com.calculator.price.model.AbstractBaseEntity;
-import com.calculator.price.model.LoanInfo;
-import com.calculator.price.model.LoanInfoRequest;
 
 import java.util.List;
 import java.util.Optional;

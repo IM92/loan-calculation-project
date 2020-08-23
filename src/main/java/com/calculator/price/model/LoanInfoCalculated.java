@@ -5,8 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Entity
 @Table(name = "LOAN_INFO_CALCULATED")
@@ -23,6 +22,8 @@ public class LoanInfoCalculated extends AbstractBaseEntity {
     @Column(name = "interest_mount")
     private BigDecimal interestAmount;
 
-    @OneToMany(mappedBy = "loanInfoCalculated")
-    private List<ItemInfo> itemInfoList = new ArrayList<>();
+    @OneToOne
+    @JoinColumn(name = "loan_info_id")
+    private LoanInfo loanInfo;
+
 }

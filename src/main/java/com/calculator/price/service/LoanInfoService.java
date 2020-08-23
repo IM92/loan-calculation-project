@@ -1,15 +1,16 @@
 package com.calculator.price.service;
 
 
-import com.calculator.price.model.ItemInfo;
 import com.calculator.price.model.LoanInfo;
 import com.calculator.price.model.LoanInfoCalculated;
 
-public interface LoanInfoService extends OptionalDomainService<LoanInfo>{
+import java.util.Optional;
+
+public interface LoanInfoService extends OptionalDomainService<LoanInfoCalculated> {
 
     LoanInfo createLoanInfo(LoanInfo loanInfo);
 
     LoanInfoCalculated createLoanInfoCalculated(LoanInfoCalculated loanInfoCalculated);
 
-    ItemInfo createItemInfo(ItemInfo itemInfo);
+    Optional<LoanInfo> findById(String id);
 }

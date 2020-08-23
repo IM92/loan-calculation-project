@@ -1,5 +1,6 @@
 package com.calculator.price.controller;
 
+import com.calculator.price.exceptions.CoreInvalidDataException;
 import com.calculator.price.mapper.LoanInfoMapper;
 import com.calculator.price.model.*;
 import com.calculator.price.model.transfer.ItemInfoDto;
@@ -37,7 +38,7 @@ public class LoanInfoFacadeImpl implements LoanInfoFacade {
     }
 
     @Override
-    public LoanInfoResponse createLoanInfos(final LoanInfoRequest loanInfoRequest) {
+    public LoanInfoResponse createCalculatedLoanInfo(final LoanInfoRequest loanInfoRequest) {
         this.loanInfoValidator.validationLoanInfo(loanInfoRequest);
 
         LoanInfoDto loanInfoDto = loanInfoMapper.mapToLoanInfoDto(loanInfoRequest);
@@ -68,18 +69,21 @@ public class LoanInfoFacadeImpl implements LoanInfoFacade {
         int number = numberOfMonths.intValue();
         List<ItemInfoDto> itemInfoDtoList = new ArrayList<>();
 
-        LoanCalculatedDto calculatedDto = new LoanCalculatedDto();
-        calculatedDto.setAmount(totalAmount);
-        calculatedDto.setTotalAmount(amount);
-        calculatedDto.setInterestAmount(finalInterestAmount);
+        LoanInfo info = loanInfoService.findById(loanInfo.getId())
+            .orElseThrow(() -> new CoreInvalidDataException(String.format("Loan into [{%s}] not found", loanInfo.getId())));
 
+        LoanInfoCalculated loanInfoCalculated = new LoanInfoCalculated();
+        loanInfoCalculated.setAmount(totalAmount);
+        loanInfoCalculated.setTotalAmount(amount);
+        loanInfoCalculated.setInterestAmount(finalInterestAmount);
+        loanInfoCalculated.setLoanInfo(info);
 
-        LoanInfoCalculated loanInfoCalculated = loanInfoMapper.mapToLoanCalculated(calculatedDto);
+        this.loanInfoValidator.validationLoanInfoCalculated(loanInfoCalculated);
 
         if(Objects.nonNull(loanInfoCalculated)) {
             loanInfoService.createLoanInfoCalculated(loanInfoCalculated);
         }
-
+        LoanCalculatedDto calculatedDto = loanInfoMapper.mapToLoanCalculatedDto(loanInfoCalculated);
 
         for(int i = 0; i < number; i ++){
             ItemInfoDto itemInfoDto = new ItemInfoDto();
@@ -87,10 +91,6 @@ public class LoanInfoFacadeImpl implements LoanInfoFacade {
             itemInfoDto.setPaymentAmount(totalPayment);
             itemInfoDtoList.add(itemInfoDto);
         }
-
-//        if(Objects.nonNull(itemInfo)){
-//            loanInfoService.createItemInfo(itemInfo);
-//        }
 
         return new LoanInfoResponse(calculatedDto,itemInfoDtoList);
     }

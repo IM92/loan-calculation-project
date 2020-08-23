@@ -5,6 +5,6 @@ import com.calculator.price.model.LoanInfoResponse;
 
 public interface LoanInfoFacade {
 
-    LoanInfoResponse createLoanInfos(final LoanInfoRequest licenseRequest);
+    LoanInfoResponse createCalculatedLoanInfo(final LoanInfoRequest licenseRequest);
 
 }

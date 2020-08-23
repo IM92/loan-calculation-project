@@ -1,10 +1,8 @@
 package com.calculator.price.service;
 
 
-import com.calculator.price.model.ItemInfo;
 import com.calculator.price.model.LoanInfo;
 import com.calculator.price.model.LoanInfoCalculated;
-import com.calculator.price.repository.ItemInfoRepository;
 import com.calculator.price.repository.LoanInfoCalculatedRepository;
 import com.calculator.price.repository.LoanInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,33 +19,32 @@ public class LoanInfoServiceImpl implements LoanInfoService{
 
     private final LoanInfoRepository loanInfoRepository;
     private final LoanInfoCalculatedRepository loanInfoCalculatedRepository;
-    private final ItemInfoRepository itemInfoRepository;
 
     @Autowired
     public LoanInfoServiceImpl(LoanInfoRepository loanInfoRepository,
-                               LoanInfoCalculatedRepository loanInfoCalculatedRepository,
-                               ItemInfoRepository itemInfoRepository) {
+                               LoanInfoCalculatedRepository loanInfoCalculatedRepository) {
         this.loanInfoRepository = loanInfoRepository;
         this.loanInfoCalculatedRepository = loanInfoCalculatedRepository;
-        this.itemInfoRepository = itemInfoRepository;
     }
 
     @Override
-    public Optional<LoanInfo> get(String id) {
-        return Optional.empty();
+    public Optional<LoanInfoCalculated> get(String id) {
+        return loanInfoCalculatedRepository.findById(id);
     }
 
     @Override
-    public List<LoanInfo> getAll() {
-        return null;
+    public List<LoanInfoCalculated> getAll() {
+        return loanInfoCalculatedRepository.findAll();
     }
 
     @Override
-    public void save(LoanInfo entity) {
+    public void save(LoanInfoCalculated prospect) {
+        loanInfoCalculatedRepository.save(prospect);
     }
 
     @Override
     public void delete(String id) {
+        loanInfoCalculatedRepository.deleteById(id);
     }
 
     @Override
@@ -61,8 +58,7 @@ public class LoanInfoServiceImpl implements LoanInfoService{
     }
 
     @Override
-    public ItemInfo createItemInfo(ItemInfo itemInfo) {
-        return itemInfoRepository.save(itemInfo);
-
+    public Optional<LoanInfo> findById(String id) {
+        return loanInfoRepository.findById(id);
     }
 }

@@ -20,7 +20,6 @@ public class LoanInfoController {
 
     private final LoanInfoFacade loanInfoFacade;
 
-
     @Autowired
     public LoanInfoController(final LoanInfoFacade loanInfoFacade) {
         this.loanInfoFacade = loanInfoFacade;
@@ -32,9 +31,9 @@ public class LoanInfoController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<LoanInfoResponse> createLoanInfos(@RequestBody LoanInfoRequest licenseRequest) {
+    public ResponseEntity<LoanInfoResponse> createCalculatedLoanInfo(@RequestBody LoanInfoRequest licenseRequest) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(this.loanInfoFacade.createLoanInfos(licenseRequest));
+                .body(this.loanInfoFacade.createCalculatedLoanInfo(licenseRequest));
     }
 }
