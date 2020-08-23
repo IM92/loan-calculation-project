@@ -4,17 +4,12 @@ import com.calculator.price.repository.LoanInfoCalculatedRepository;
 import com.calculator.price.repository.LoanInfoRepository;
 import com.calculator.price.service.LoanInfoService;
 import com.calculator.price.service.LoanInfoServiceImpl;
-import com.github.tomakehurst.wiremock.client.WireMock;
 import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static com.github.tomakehurst.wiremock.client.WireMock.*;
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
 @RunWith(SpringRunner.class)
@@ -45,12 +40,23 @@ public class LoanInfoServiceTest {
 //    }
 //
 //    @Test
-//    public void exactUrlOnly() {
-//        stubFor(post(urlEqualTo("/loanInfo/installment-plan"))
+//    public void exactUrlOnly() throws Exception {
+//        stubFor(get(urlEqualTo("/loanInfo/installment-plan"))
+//                .withHeader("Accept", equalTo("application/json"))
 //                .willReturn(aResponse()
+//                        .withStatus(201).withBody(String.valueOf(LoanInfoData.createLoanInfoCalculated()))
 //                        .withHeader("Content-Type", "application/json")
-//                        .withBody(String.valueOf(LoanInfoData.createLoanInfoCalculated()))));
+//                        .withStatusMessage("Everything was just fine!"))
+//                .willReturn(created()));
 //
-//        verify(exactly(1), postRequestedFor(urlEqualTo("/loanInfo/installment-plan")));
+//        String url = "http://localhost:8080/loanInfo/installment-plan";
+//        HttpClient client = HttpClientBuilder.create().build();
+//        HttpGet request = new HttpGet(url);
+//        request.addHeader("Content-Type", "application/json");
+//        request.addHeader("Accept", "application/json");
+//        HttpResponse response = client.execute(request);
+//
+//        verify(getRequestedFor(urlPathEqualTo("/loanInfo/installment-plan"))
+//                .withHeader("Content-Type", equalTo("application/json")));
 //    }
 }
